@@ -83,16 +83,19 @@ public class RecursionLab {
 	}			
 
 	/****************************************************/
-	/* Factorials using recursion to get the answer		*/
-	/* This method uses the following logic, */
+	/* Factorial sum using recursion to get the answer	*/
+	/* This method uses the following logic, 			*/
+	/* n! = n(n-1). This expressed recursively looks like*/
+	/* n! = n * (n - 1) * (n - 2) * (n - 3)...			*/
 	/****************************************************/
 	public static int recursiveFactorialSum(int n){
 		updateRecursiveFactorialSum(n);
 		
 		if(n == 1){
-			return 1;
+			return 1; //the base case, such that when n is 1, return this as the final solution
 		}else{
-			return (n * recursiveFactorialSum(n-1));
+			return (n * recursiveFactorialSum(n-1)); //the execution of the method while running will
+			//place it into a suspended state, and run again with the new value of n.
 		}
 	}
 
