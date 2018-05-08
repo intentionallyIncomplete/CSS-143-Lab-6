@@ -39,9 +39,13 @@ public class RecursionLab {
 		 */
 		//int solution = iterativeSum( 20 );
 		//int solution = recursiveSum( 20 );
+		
+		/* Methods for Lab*/
 		//int solution = recursiveFactorialSum(20); //used int = 4 for testing, should return 24
-		int solution = exponentialRecursion(2,3); //needs two args - 1 for the base and the other 
-		//for the exponent to raise the base to. Use (3,2) to test and should return 8
+		int solution = exponentialRecursion(2,2); //needs two args - 1 for the base and the other 
+		//for the exponent to raise the base to. (2,3) should produce 9 because it's 3^2
+		
+		
 
 
 		//Some GUI details
@@ -104,14 +108,21 @@ public class RecursionLab {
 	}
 	
 	/****************************************************/
-	/* TEXT HERE */
+	/* The value of a base raised to a given exponent is*/
+	/* determined here. The exponent and base values are*/
+	/* passed in through the parameters and then the	*/
+	/* update method is called. Then if the exponent is	*/
+	/* not 1 or negative, the recursive call is made in */
+	/* the return value of the base ## multiplied by the*/
+	/* value of the base ## raised to the value of the	*/
+	/* exponent -1. */
 	/****************************************************/
 	public static int exponentialRecursion(int exp, int base){
 		updateExponentialRecursionDisplay(exp, base);
 		if(exp == 1){
 			return base;
-		}else if (exp < 0){
-			return exp;
+		}else if (exp <= 0){
+			return base * exp;
 		}else{
 			return (base * exponentialRecursion(exp-1,base));
 		}
