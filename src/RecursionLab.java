@@ -39,7 +39,9 @@ public class RecursionLab {
 		 */
 		//int solution = iterativeSum( 20 );
 		//int solution = recursiveSum( 20 );
-		int solution = recursiveFactorialSum(20); //used int = 4 for testing, should return 24
+		//int solution = recursiveFactorialSum(20); //used int = 4 for testing, should return 24
+		int solution = exponentialRecursion(2,3); //needs two args - 1 for the base and the other 
+		//for the exponent to raise the base to. Use (3,2) to test and should return 8
 
 
 		//Some GUI details
@@ -53,7 +55,9 @@ public class RecursionLab {
 		System.exit(0);
 	}
 
-
+	/****************************************************/
+	/*				The Recursion Methods				*/
+	/****************************************************/
 
 	/** recursion is similar to iterative looping, but we
 	 *  use method calls to repeat computations (or decompose the problem) 
@@ -90,7 +94,7 @@ public class RecursionLab {
 	/****************************************************/
 	public static int recursiveFactorialSum(int n){
 		updateRecursiveFactorialSum(n);
-		
+
 		if(n == 1){
 			return 1; //the base case, such that when n is 1, return this as the final solution
 		}else{
@@ -98,6 +102,24 @@ public class RecursionLab {
 			//place it into a suspended state, and run again with the new value of n.
 		}
 	}
+	
+	/****************************************************/
+	/* TEXT HERE */
+	/****************************************************/
+	public static int exponentialRecursion(int exp, int base){
+		updateExponentialRecursionDisplay(exp, base);
+		if(exp == 1){
+			return base;
+		}else if (exp < 0){
+			return exp;
+		}else{
+			return (base * exponentialRecursion(exp-1,base));
+		}
+	}
+
+	/****************************************************/
+	/*					Display Methods					*/
+	/****************************************************/
 
 	public static void updateIterativeDisplay(int n) {
 		count++;
@@ -142,7 +164,7 @@ public class RecursionLab {
 		myArea.setText( text );
 
 	}
-	
+
 	public static void updateRecursiveFactorialSum(int n){
 		count++;
 		String text = myArea.getText();
@@ -163,7 +185,35 @@ public class RecursionLab {
 		if( n != 1 ) {
 			text += "\n The return statement which invokes the recursive call is \"return ( " + n + " + recursiveFactorialSum( "+ (n - 1) +" ));";
 		} else {
-			text += "\n The base case has been hit.  The return statement is \"return 1;\" which is the value returned to the expression above. ";
+			text += "\n The base case has been hit.\nThe return statement is \"return 1;\" which is the value returned to the expression above. ";
+			text += "\n Notice how hitting the base case will provide a solid, known piece of information from which we will construct more known ";
+			text += "\n information by bubbling up through all of the other, yet-to-be-determined return expressions";
+		}
+		text += "\n***************************************************************************/";
+
+		myArea.setText( text );
+	}
+
+	public static void updateExponentialRecursionDisplay(int exp, int base){
+		count++;
+		String text = myArea.getText();
+
+		if( count == 1 )  {
+			text += "\n       return ( n + exponentialRecursion( n - 1 ) ) \n\n";
+			text += "       CALL STACK IN MAIN MEMORY                ";
+		}
+
+
+		text += "\n/*******************Method invocation " + count + "*********************";
+
+
+		text += "\n Calling exponentialRecursion( int n = " + exp +" ). ";
+		text += "\n The return statement from this function will resolve in " + (exp-1) + " more recursive method calls...";
+
+		if( exp != 1 ) {
+			text += "\n The return statement which invokes the recursive call is \"return ( " + exp + " * exponentialRecursion( "+ (exp - 1) +","+base+"));";
+		} else {
+			text += "\n The base case has been hit.\nThe return statement is \"return 1;\" which is the value returned to the expression above. ";
 			text += "\n Notice how hitting the base case will provide a solid, known piece of information from which we will construct more known ";
 			text += "\n information by bubbling up through all of the other, yet-to-be-determined return expressions";
 		}
