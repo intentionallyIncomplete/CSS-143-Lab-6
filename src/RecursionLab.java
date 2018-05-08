@@ -37,8 +37,8 @@ public class RecursionLab {
 		 * inside the recursiveSum() function
 		 * 
 		 */
-		int solution = iterativeSum( 20 );
-		//int solution = recursiveSum( 20 );
+		//int solution = iterativeSum( 20 );
+		int solution = recursiveSum( 20 );
 		
 		
 		//Some GUI details
