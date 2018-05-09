@@ -43,13 +43,23 @@ public class RecursionLab {
 		/****************************************************/
 		/*					Methods for Lab					*/
 		/****************************************************/
-		//int solution = recursiveFactorialSum(20); //used int = 4 for testing, should return 24
-		//int solution = exponentialRecursion(2,3); //needs two args - 1 for the base and the other 
+		//used int = 4 for testing, should return 24
+		//int solution = recursiveFactorialSum(20);
+		
+		//needs two args - 1 for the base and the other 
 		//for the exponent to raise the base to. (2,3) should produce 9 because it's 3^2
+		//int solution = exponentialRecursion(2,3); 
+		
+		//
 		//int solution = quickExponents(2,3);
-		int solution = fibonacciRecursion();
+		
+		//this method I tested using some paper and a Fibonacci 
+		//calculator online that I found to check against my answers
+		//located here --> http://php.bubble.ro/fibonacci/
+		int solution = fib(10); 
+		
+		
 		/******************End Method Calls******************/
-
 
 		//Some GUI details
 		myArea.setText(("Result is : " + solution + "\n" + myArea.getText()));
@@ -125,7 +135,7 @@ public class RecursionLab {
 		if(exp == 1){
 			return base;
 		}else if (exp <= 0){
-			return base * exp;
+			return exp;
 		}else{
 			return (base * exponentialRecursion(exp-1,base));
 		}
@@ -151,8 +161,15 @@ public class RecursionLab {
 	/****************************************************/
 	/* TEXT HERE */
 	/****************************************************/
-	public static int fibonacciRecursion(){
-		updateFibonacciRecursion();
+	public static int fib(int n){
+		updateFib(n);
+		if(n == 0){
+			return 0;
+		}else if(n == 1){
+			return 1;
+		}else{
+			return fib(n-1) + fib(n-2);
+		}
 	}
 
 	/****************************************************/
@@ -288,7 +305,7 @@ public class RecursionLab {
 		myArea.setText( text );
 	}
 	
-	public static void updateFibonacciRecursion(){
+	public static void updateFib(int n){
 		count++;
 		String text = myArea.getText();
 
@@ -301,11 +318,11 @@ public class RecursionLab {
 		text += "\n/*******************Method invocation " + count + "*********************";
 
 
-		text += "\n Calling exponentialRecursion( int n = " + exp +" ). ";
-		text += "\n The return statement from this function will resolve in " + (exp-1) + " more recursive method calls...";
+		text += "\n Calling exponentialRecursion( int n = " + n +" ). ";
+		text += "\n The return statement from this function will resolve in " + (n-1) + " more recursive method calls...";
 
-		if( exp != 1 ) {
-			text += "\n The return statement which invokes the recursive call is \"return ( " + exp + " * exponentialRecursion( "+ (exp - 1) +","+base+"));";
+		if( n != 1 ) {
+			text += "\n The return statement which invokes the recursive call is \"return ( " + n + " * exponentialRecursion( "+ (n - 1) +"));";
 		} else {
 			text += "\n The base case has been hit.\nThe return statement is \"return 1;\" which is the value returned to the expression above. ";
 			text += "\n Notice how hitting the base case will provide a solid, known piece of information from which we will construct more known ";
