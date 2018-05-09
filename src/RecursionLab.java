@@ -136,7 +136,14 @@ public class RecursionLab {
 	/* recursively with respect to how n is decremented.*/
 	/****************************************************/
 	public static int quickExponents(int exp, int base){
-
+		updateQuickExponentsDisplay(exp,base);
+		if(exp==0){
+			return 1; //the base case for this recursive call
+		}else if(exp % 2 == 0){
+			return base*quickExponents(exp/2,base);
+		}else {
+			return base*quickExponents((exp-1)/2,base);
+		}
 
 	}
 
