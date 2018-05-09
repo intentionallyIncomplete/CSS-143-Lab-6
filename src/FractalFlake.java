@@ -1,4 +1,6 @@
-import java.awt.Graphics;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.geom.*;
 
 /****************************************/
 /*			CLASS DESCRIPTION			*/
@@ -9,8 +11,8 @@ import java.awt.Graphics;
 
 public class FractalFlake extends Shape {
 
-	private final int LIMIT;
-	private final int NUMBRANCHES;
+	private final int size;
+	private final int numBranches;
 
 	/*First constructor has 4 arguments
 	 * for the x and y starting points and to set the 
@@ -21,16 +23,15 @@ public class FractalFlake extends Shape {
 	 * The size and branches values are then assigned to
 	 * the limit and numBranches instance variables.
 	 * */
-	public FractalFlake(int x, int y, int size, int branches) {
+	public FractalFlake(int x, int y) {
 		super(x,y);
-		LIMIT = size;
-		NUMBRANCHES = branches;
+		this.size = 10;
+		this.numBranches = 3;
 	}
 
-
 	@Override
-	public void draw(Graphics g) { 
-		draw(g,getX(), getY(),LIMIT);
+	public void draw(Graphics g) { //a redirect or facade
+		draw(g,getX(), getY(),size, numBranches);
 	}
 
 	/*This draw() method overrides the draw() method above
@@ -39,21 +40,15 @@ public class FractalFlake extends Shape {
 	 * to draw lines to the screen with the size
 	 * attributes specified.
 	 * */
-	private void draw(Graphics g, int startX, int startY, int limit) {
-		if(limit>= 3) { //base case is depth <3
-			for ( int i = 0; i < NUMBRANCHES; i++ )
-			{
-				int x2 = startX + (int) (LIMIT *
-						Math.cos( (2 * Math.PI / NUMBRANCHES) * i ));
-				int y2 = startY - (int) (LIMIT *
-						Math.sin( (2 * Math.PI / NUMBRANCHES) * i ));
-				g.drawLine( startX, startY, x2, y2 ); //do a branch
-				draw(g, x2, y2, limit/3); //recursive call
+	public void draw(Graphics g, int x, int y, int size, int numBranches) {
+		for (int a = 0; a < 360; a += 60) {
+			double rad = a * Math.PI / 180;
+			int x2 = (int) (x + Math.cos(rad) * size);
+			int y2 = (int) (y + Math.sin(rad) * size);
+			g.drawLine(x, y, x2, y2);
+			if (numBranches > 0) {
+				draw(g, x2, y2, size/3, numBranches-1);
 			}
 		}
 	}
-
-	//	public static void main(String[] args) {
-	//		FractalFlake ff = new FractalFlake(1,1,1,1);
-	//	}
 }
