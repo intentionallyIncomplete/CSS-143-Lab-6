@@ -46,7 +46,8 @@ public class RecursionLab {
 		//int solution = recursiveFactorialSum(20); //used int = 4 for testing, should return 24
 		//int solution = exponentialRecursion(2,3); //needs two args - 1 for the base and the other 
 		//for the exponent to raise the base to. (2,3) should produce 9 because it's 3^2
-		int solution = quickExponents(2,3);
+		//int solution = quickExponents(2,3);
+		int solution = fibonacciRecursion();
 		/******************End Method Calls******************/
 
 
@@ -145,6 +146,13 @@ public class RecursionLab {
 			return base*quickExponents((exp-1)/2,base);
 		}
 
+	}
+	
+	/****************************************************/
+	/* TEXT HERE */
+	/****************************************************/
+	public static int fibonacciRecursion(){
+		updateFibonacciRecursion();
 	}
 
 	/****************************************************/
@@ -253,6 +261,34 @@ public class RecursionLab {
 	}
 
 	public static void updateQuickExponentsDisplay(int exp, int base){
+		count++;
+		String text = myArea.getText();
+
+		if( count == 1 )  {
+			text += "\n       return ( n + exponentialRecursion( n - 1 ) ) \n\n";
+			text += "       CALL STACK IN MAIN MEMORY                ";
+		}
+
+
+		text += "\n/*******************Method invocation " + count + "*********************";
+
+
+		text += "\n Calling exponentialRecursion( int n = " + exp +" ). ";
+		text += "\n The return statement from this function will resolve in " + (exp-1) + " more recursive method calls...";
+
+		if( exp != 1 ) {
+			text += "\n The return statement which invokes the recursive call is \"return ( " + exp + " * exponentialRecursion( "+ (exp - 1) +","+base+"));";
+		} else {
+			text += "\n The base case has been hit.\nThe return statement is \"return 1;\" which is the value returned to the expression above. ";
+			text += "\n Notice how hitting the base case will provide a solid, known piece of information from which we will construct more known ";
+			text += "\n information by bubbling up through all of the other, yet-to-be-determined return expressions";
+		}
+		text += "\n***************************************************************************/";
+
+		myArea.setText( text );
+	}
+	
+	public static void updateFibonacciRecursion(){
 		count++;
 		String text = myArea.getText();
 
