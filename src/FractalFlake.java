@@ -11,9 +11,8 @@ import java.awt.geom.*;
 
 public class FractalFlake extends Shape {
 
-	private final int LIMIT = 3;
-	private int NUM_BRANCHES = 3;
 	private int size;
+	private int limit;
 
 	/* This constructor takes the x and y coordinate
 	 * values in through the constructor here. 
@@ -26,18 +25,27 @@ public class FractalFlake extends Shape {
 	 * number of "branches", or recursive passes that will
 	 * be made before the base case is reached
 	 * */
-	public FractalFlake(int x, int y, int size) {
+	public FractalFlake(int x, int y, int size, int limit) {
 		super(x,y); //passed to the super class
 		this.size = size;
+		this.limit = limit;
 	}
-
-	public void draw(Graphics g, int size){
-		int x2 = getX() + 10;
-		int y2 = getY() + 5;
-		if(size == 1){
-			g.drawLine(getX(), getY(), x2, y2);
-		}else{
-			draw(g, size-1);
-		}
+	
+	@Override
+	public void draw(Graphics g){
+		draw(g, getX(), getY(),size, limit);
+	}
+	
+	/**/
+	public void draw(Graphics g, int x, int y, int size, int limit) {
+	    for (int a = 0; a < 360; a += 60) {
+	        double rad = a * Math.PI / 180;
+	        int x2 = (int) (x + Math.cos(rad) * size);
+	        int y2 = (int) (y + Math.sin(rad) * size);
+	        g.drawLine(x, y, x2, y2);
+	        if (limit > 0) {
+	            draw(g, x2, y2, size/3, limit-1);
+	        }
+	    }
 	}
 }
