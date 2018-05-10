@@ -86,9 +86,9 @@ class PolyDemo extends JFrame {
 			 *
 			 *******************************/
 			switch( ( int )(Math.random() * 4) ) {
-			case 0: 	retVal = new FractalFlake(x,y,5,5);//new Square( x, y, getRandInt(), getRandInt() );
+			case 0: 	retVal = new FractalFlake(x,y,10,5);//new Square( x, y, getRandInt(), getRandInt() );
 			break;
-			case 1: 	retVal = new FractalFlake(x,y,5,5);//Cube( x, y, getRandInt(), getRandInt(), getRandInt() );
+			case 1: 	retVal = new FractalFlake(x,y,50,5);//Cube( x, y, getRandInt(), getRandInt(), getRandInt() );
 			break;
 			case 2: 	retVal = new FractalFlake(x,y,5,5);
 			break;

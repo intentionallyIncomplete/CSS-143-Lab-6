@@ -38,12 +38,12 @@ public class FractalFlake extends Shape {
 	
 	/**/
 	public void draw(Graphics g, int x, int y, int size, int limit) {
-	    for (int a = 0; a < 360; a += 60) {
+	    for (int a = 0; a < 360; a += 60) { //go in a complete circle
 	        double rad = a * Math.PI / 180;
 	        int x2 = (int) (x + Math.cos(rad) * size);
 	        int y2 = (int) (y + Math.sin(rad) * size);
-	        g.drawLine(x, y, x2, y2);
-	        if (limit > 0) {
+	        if (limit >= 3) {
+	        	g.drawLine(x, y, x2, y2);
 	            draw(g, x2, y2, size/3, limit-1);
 	        }
 	    }
