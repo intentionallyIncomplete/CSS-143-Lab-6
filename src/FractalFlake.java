@@ -6,49 +6,38 @@ import java.awt.geom.*;
 /*			CLASS DESCRIPTION			*/
 /* This class, FractalFlake, will use	*/
 /* recursion in the draw() method to	*/
-/* create a shape with branches (flake)	*/
+/* create a recursive line				*/
 /****************************************/
 
 public class FractalFlake extends Shape {
 
-	private final int size;
-	private final int numBranches;
+	private final int LIMIT = 3;
+	private int NUM_BRANCHES = 3;
+	private int size;
 
-	/*First constructor has 4 arguments
-	 * for the x and y starting points and to set the 
-	 * limit and numBranches instance values.
-	 * The points' values are passed in through
-	 * this constructor which invokes the super()
-	 * class constructor in Shape.
-	 * The size and branches values are then assigned to
-	 * the limit and numBranches instance variables.
+	/* This constructor takes the x and y coordinate
+	 * values in through the constructor here. 
+	 * The values are passed to the super class (Shape)
+	 * constructor for assignment. The values are obtained
+	 * by calling getX() or getY() from this class. 
+	 * The constructor below will also set the "size"
+	 * of the line to the private final int instance variable
+	 * and the "numBranches" to the variable for the
+	 * number of "branches", or recursive passes that will
+	 * be made before the base case is reached
 	 * */
-	public FractalFlake(int x, int y) {
-		super(x,y);
-		this.size = 10;
-		this.numBranches = 3;
+	public FractalFlake(int x, int y, int size) {
+		super(x,y); //passed to the super class
+		this.size = size;
 	}
 
-	@Override
-	public void draw(Graphics g) { //a redirect or facade
-		draw(g,getX(), getY(),size, numBranches);
-	}
-
-	/*This draw() method overrides the draw() method above
-	 * This will take in the x,y coordinate pair
-	 * and the LIMIT and NUMBRANCHES values
-	 * to draw lines to the screen with the size
-	 * attributes specified.
-	 * */
-	public void draw(Graphics g, int x, int y, int size, int numBranches) {
-		for (int a = 0; a < 360; a += 60) {
-			double rad = a * Math.PI / 180;
-			int x2 = (int) (x + Math.cos(rad) * size);
-			int y2 = (int) (y + Math.sin(rad) * size);
-			g.drawLine(x, y, x2, y2);
-			if (numBranches > 0) {
-				draw(g, x2, y2, size/3, numBranches-1);
-			}
+	public void draw(Graphics g, int size){
+		int x2 = getX() + 10;
+		int y2 = getY() + 5;
+		if(size == 1){
+			g.drawLine(getX(), getY(), x2, y2);
+		}else{
+			draw(g, size-1);
 		}
 	}
 }
